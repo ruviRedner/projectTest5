@@ -8,7 +8,6 @@ export interface Igrads extends Document {
     {
       subject: string;
       grade: number;
-      create_at: Date;
     },
   ];
   average: number;
