@@ -1,11 +1,9 @@
 {
   "name": "blog-platform",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "dist/app.js",
   "scripts": {
-    "start": "tsc && node dist/app.js",
-    "dev": "nodemon src/app.ts",
-    "build": "tsc"
+    "start": "nodemon"
   },
   "keywords": [],
   "author": "",
