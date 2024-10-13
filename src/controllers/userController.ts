@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { CreateClass, CreateNewUser, GetstudentDetailsAmdGrads } from "../services/userService";
+import { CreateClass, CreateNewUser,  GetstudentDetailsOfAllStudents } from "../services/userService";
 import RequestWithUser from "../interfaces/requestWithUser";
 
 export const createUser = async (req: Request, res: Response) => {
@@ -25,10 +25,15 @@ export const creatNewClass = async (req: RequestWithUser, res: Response) => {
 
 export const getStudent = async (req: RequestWithUser, res: Response) => {
     try{
-        const student = await GetstudentDetailsAmdGrads(req.user.id as any, req.params.id);
+        const student = await GetstudentDetailsOfAllStudents(req.user.id as any);
         if(!student) {
             return res.status(404).json({ message: "Student not found" });
         }
         res.status(200).json({ student });
+    }catch(err){
+        res.status(500).json({ err: err });
     }
 }
+
+
+
