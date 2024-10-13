@@ -5,5 +5,5 @@ export interface IteacherOrStudent extends Document {
   password: string;
   roll:string;
   email: string;
-  classId: Types.ObjectId;
+  classId?: Types.ObjectId;
 }
