@@ -1,6 +1,6 @@
 import { IteacherOrStudent } from "../interfaces/IteacherOrStudent";
 
-import mongoose, { Schema, Types, Model } from "mongoose";
+import mongoose, { Schema, Model } from "mongoose";
 import validator from "validator";
 
 const teacherOrstudentSchema: Schema<IteacherOrStudent> =
@@ -29,7 +29,7 @@ const teacherOrstudentSchema: Schema<IteacherOrStudent> =
       required: true,
       enum: ["student", "teacher"],
     },
-    classId: [{ type: Types.ObjectId, ref: "clases" }],
+    classId: { type: Schema.Types.ObjectId, ref: "clases" },
   });
 
 const userModel: Model<IteacherOrStudent> = mongoose.model<IteacherOrStudent>(
