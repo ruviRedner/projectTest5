@@ -4,6 +4,7 @@ import userRouter from "./routes/userRoutes";
 import { errorHandler } from "./middleware/errorHandler";
 import connectDB from "./config/db";
 import GradsRouter from "./routes/gradsRouter";
+import authRouter from "./routes/authRouter";
 
 dotenv.config();
 
@@ -18,6 +19,7 @@ connectDB();
 // Routes
 app.use("/user", userRouter);
 app.use("/grads", GradsRouter);
+app.use("/auth", authRouter);
 
 
 // Error handling middleware
