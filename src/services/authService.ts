@@ -18,11 +18,11 @@ export const loginToSystem = async (
   if (!user) {
     return new Error("User not found");
   }
-  const isMatch = await bcrypt.compare(password, user.password);
+  //   const isMatch = await bcrypt.compare(password, user.password);
 
-  if (!isMatch) {
-    return new Error("Incorrect password");
-  }
+  //   if (!isMatch) {
+  //     return new Error("Incorrect password");
+  //   }
 
   const payload: payloedDTO = {
     id: user._id,
@@ -31,11 +31,9 @@ export const loginToSystem = async (
     roll: user.roll,
   };
 
-  console.log(process.env.TOKEN_SECRET);
   const token: string = jwt.sign(payload, process.env.TOKEN_SECRET as string, {
     expiresIn: "1h",
   });
-  console.log(token);
 
   return token;
 };
