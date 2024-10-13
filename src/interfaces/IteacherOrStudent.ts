@@ -1,8 +1,9 @@
 import { Types } from "mongoose";
 
-export interface Istudent extends Document {
+export interface IteacherOrStudent extends Document {
   username: string;
   password: string;
+  roll:string;
   email: string;
   classId: Types.ObjectId;
 }
