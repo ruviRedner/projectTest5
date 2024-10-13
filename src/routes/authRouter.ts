@@ -4,7 +4,7 @@ import { login, logout } from "../controllers/authController";
 const authRouter = Router();
 /**
  * @swagger
- * /api/auth/login:
+ * /auth/login:
  *   post:
  *     summary: Login to the system.
  *     description: Login to the system.
@@ -39,7 +39,7 @@ const authRouter = Router();
 authRouter.post("/login",login)
 /**
  * @swagger
- * /api/auth/logout:
+ * /auth/logout:
  *   delete:
  *     summary: Logout from system.
  *     description: Logout from system.
