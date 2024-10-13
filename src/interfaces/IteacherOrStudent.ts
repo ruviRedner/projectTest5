@@ -6,5 +6,4 @@ export interface IteacherOrStudent extends Document {
   roll:string;
   email: string;
   classId?: Types.ObjectId;
-  className?:string
 }
