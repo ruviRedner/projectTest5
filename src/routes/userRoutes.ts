@@ -1,5 +1,5 @@
-import { Router } from "express";
-import { createNewClass, createUser, getStudent } from "../controllers/userController";
+import { NextFunction, Router } from "express";
+import {  createNewClass, createUser, creatNewClass, getStudent } from "../controllers/userController";
 import verifyUser from "../middleware/verifidUser";
 
 
@@ -84,8 +84,8 @@ userRouter.post("/", createUser);
  *       '500':
  *         description: Internal server error.
  */
-userRouter.get("/", getStudent);
+userRouter.get("/",verifyUser as any, getStudent as unknown as NextFunction);
 
-userRouter.post("/class" , createNewClass);
+userRouter.post("/class",verifyUser as any, creatNewClass as unknown as NextFunction);
 
 export default userRouter;
