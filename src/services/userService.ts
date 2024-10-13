@@ -44,25 +44,17 @@ export const CreateClass = async (classs: string) => {
     }
 }
 
-export const GetstudentDetailsAmdGrads = async (Tid:string,StudentId:string) => {
+export const GetstudentDetailsOfAllStudents = async (Tid:string) => {
     try {
-    const student = await userModel.findById(StudentId)
-    if (!student) {
-        throw new Error("Student not found.");
-    }
+   
     const teacher = await userModel.findById(Tid)
     if (!teacher) {
         throw new Error("Teacher not found.");
     }
-    const grads = await gradsModel.findOne({ teacherId: Tid, studentId: StudentId}).populate("grads");
-    if (!grads) {
-        throw new Error("Grades not found.");
-    }
-    return {
-        student,
-        teacher,
-        grads,
-    };
+    const students = await userModel.find({roll:"student"})
+    return students
+  
+    
 }catch (err) {
     console.error("Error getting student details and grades:", err);
     throw err;
