@@ -25,3 +25,19 @@ import gradsModel from "../models/gradsModel";
     
    
 }
+export const getStudentGradeByStudent = async (Sid:string) => {
+    const grades = await gradsModel.find({ studentId: Sid });
+    if (!grades) {
+        throw new Error("No grades found for this student");
+    }
+    return grades;
+
+}
+export const getStudentGradeByIsTeacher = async (Tid:string) => {
+    const grades = await gradsModel.find({ studentId: Tid });
+    if (!grades) {
+        throw new Error("No grades found for this student");
+    }
+    return grades;
+
+}

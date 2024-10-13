@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { getAvarage } from "../services/graedsService";
+import { getAvarage, getStudentGradeByStudent } from "../services/graedsService";
 import RequestWithUser from "../interfaces/requestWithUser";
 
 export const addGradeToStudent = async (
@@ -29,9 +29,19 @@ export const getAva = async (
 };
 
 export const getStudentGrade = async (
-  req: Request,
+  req:  RequestWithUser,
   res: Response
-): Promise<void> => {};
+): Promise<void> => {
+  try {
+    const studentGrade = await getStudentGradeByStudent(req.user.id as any)
+    res.status(200).json({ studentGrade });
+    
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Internal server error" });
+    
+  }
+};
 
 export const getStudentGradeByTeacher = async (
   req: Request,

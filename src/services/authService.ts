@@ -18,11 +18,11 @@ export const loginToSystem = async (
   if (!user) {
     return new Error("User not found");
   }
-  //   const isMatch = await bcrypt.compare(password, user.password);
+    // const isMatch = await bcrypt.compare(password, user.password);
 
-  //   if (!isMatch) {
-  //     return new Error("Incorrect password");
-  //   }
+    // if (!isMatch) {
+    //   return new Error("Incorrect password");
+    // }
 
   const payload: payloedDTO = {
     id: user._id,
