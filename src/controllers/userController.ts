@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
-import { CreateClass, CreateNewUser } from "../services/userService";
+import { CreateClass, CreateNewUser, GetstudentDetailsAmdGrads } from "../services/userService";
+import RequestWithUser from "../interfaces/requestWithUser";
 
 export const createUser = async (req: Request, res: Response) => {
   try {
@@ -10,8 +11,11 @@ export const createUser = async (req: Request, res: Response) => {
   }
 };
 
-export const createNewClass = async (req: Request, res: Response) => {
+export const creatNewClass = async (req: RequestWithUser, res: Response) => {
     try {
+        if(req.user.roll !== "teacher") {
+            return res.status(403).json({ message: "You are not a teacher" });
+        }
       const newClass = await CreateClass(req.body);
       res.status(201).json({ newClass });
     } catch (err) {
@@ -19,4 +23,12 @@ export const createNewClass = async (req: Request, res: Response) => {
     }
   };
 
-export const getStudent = async (req: Request, res: Response) => {};
+export const getStudent = async (req: RequestWithUser, res: Response) => {
+    try{
+        const student = await GetstudentDetailsAmdGrads(req.user.id as any, req.params.id);
+        if(!student) {
+            return res.status(404).json({ message: "Student not found" });
+        }
+        res.status(200).json({ student });
+    }
+}
