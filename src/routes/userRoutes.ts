@@ -1,5 +1,7 @@
 import { Router } from "express";
-import { createUser, getStudent } from "../controllers/userController";
+import { createNewClass, createUser, getStudent } from "../controllers/userController";
+import verifyUser from "../middleware/verifidUser";
+
 
 const userRouter = Router();
 /**
@@ -27,9 +29,6 @@ const userRouter = Router();
  *                 description: The email of the user.
  *               roll:
  *                 type: string
- *               className:
- *                 type: string
- *                 description: The class name of the teachers.
  *     examples:
  *       example1:
  *         summary: Example user data.
@@ -86,5 +85,7 @@ userRouter.post("/", createUser);
  *         description: Internal server error.
  */
 userRouter.get("/", getStudent);
+
+userRouter.post("/class" , createNewClass);
 
 export default userRouter;
