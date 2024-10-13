@@ -1,6 +1,6 @@
-import { Router } from "express";
+import { NextFunction, Router } from "express";
 
-import { addGradeToStudent,  getAvarage, getStudentGrade, getStudentGradeByTeacher, updateGrade } from "../controllers/gradsController";
+import { addGradeToStudent,  getAva, getStudentGrade, getStudentGradeByTeacher, updateGrade } from "../controllers/gradsController";
 
 const GradsRouter = Router();
 /**
@@ -262,6 +262,6 @@ GradsRouter.get("/teacher", getStudentGradeByTeacher);
  *       '500':
  *         description: Internal server error.
  */
-GradsRouter.get("/ava", getAvarage);
+GradsRouter.get("/ava", getAva as unknown as NextFunction);
 
 export default GradsRouter;
