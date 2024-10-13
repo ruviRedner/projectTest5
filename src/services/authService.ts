@@ -11,13 +11,10 @@ export const loginToSystem = async (
   const { username, password } = userData;
 
   const user = await userModel.findOne({ username });
-  if (!username) {
-    return new Error("Username is required");
+  if (!username || !password) {
+    return new Error("Username and password is required");
   }
 
-  if (!password) {
-    throw new Error("Password is required");
-  }
   if (!user) {
     return new Error("User not found");
   }
