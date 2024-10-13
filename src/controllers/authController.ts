@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import loginDTO from "../interfaces/Ilogin";
-import { loginToSystem} from "../services/authService";
+import { loginToSystem } from "../services/authService";
 
 
 export const login = async (
