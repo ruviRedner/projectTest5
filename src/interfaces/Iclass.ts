@@ -1,7 +1,7 @@
 import { Types } from "mongoose";
 
 export interface Iclass extends Document {
-  username: string;
+  name: string;
   teacherId: Types.ObjectId;
-  students: Types.ObjectId[];
+  studentsId: Types.ObjectId[];
 }
