@@ -1,5 +1,5 @@
 import { NextFunction, Router } from "express";
-import {  createNewClass, createUser, creatNewClass, getStudent } from "../controllers/userController";
+import { createUser, creatNewClass, getStudent } from "../controllers/userController";
 import verifyUser from "../middleware/verifidUser";
 
 
