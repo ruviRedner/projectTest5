@@ -1,6 +1,6 @@
-import { Request } from "express";
-import tokenPayloed from "./tokenPayloed"
+import { Request } from 'express';
+import tokenPayloed from './tokenPayloed';
 
-export default interface RequestWithUser extends Request{
-    user:tokenPayloed
+export default interface RequestWithUser extends Request {
+  user: tokenPayloed;
 }

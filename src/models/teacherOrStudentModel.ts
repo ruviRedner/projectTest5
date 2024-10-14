@@ -1,7 +1,7 @@
-import { IteacherOrStudent } from "../interfaces/IteacherOrStudent";
+import { IteacherOrStudent } from '../interfaces/IteacherOrStudent';
 
-import mongoose, { Schema, Model } from "mongoose";
-import validator from "validator";
+import mongoose, { Schema, Model } from 'mongoose';
+import validator from 'validator';
 
 const teacherOrstudentSchema: Schema<IteacherOrStudent> =
   new Schema<IteacherOrStudent>({
@@ -10,30 +10,30 @@ const teacherOrstudentSchema: Schema<IteacherOrStudent> =
       required: true,
       unique: true,
       minlength: 5,
-      maxlength: 10,
+      maxlength: 10
     },
     password: {
       type: String,
       required: true,
       minlength: 5,
-      select: false,
+      select: false
     },
     email: {
       type: String,
       required: true,
       unique: true,
-      validate: [validator.isEmail, "Invalid email address"],
+      validate: [validator.isEmail, 'Invalid email address']
     },
     roll: {
       type: String,
       required: true,
-      enum: ["student", "teacher"],
+      enum: ['student', 'teacher']
     },
-    classId: { type: Schema.Types.ObjectId, ref: "clases" },
+    classId: { type: Schema.Types.ObjectId, ref: 'clases' }
   });
 
 const userModel: Model<IteacherOrStudent> = mongoose.model<IteacherOrStudent>(
-  "users",
+  'users',
   teacherOrstudentSchema
 );
 

@@ -1,4 +1,4 @@
-import { Types } from "mongoose";
+import { Types } from 'mongoose';
 
 export interface Igrads extends Document {
   teacherId: Types.ObjectId;
@@ -9,7 +9,7 @@ export interface Igrads extends Document {
       subject: string;
       grade: number;
       studentId: Types.ObjectId;
-    },
+    }
   ];
   average: number;
 }

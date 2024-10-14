@@ -1,15 +1,14 @@
-
-import { NextFunction, Request, Response } from "express";
-import jwt, { TokenExpiredError } from "jsonwebtoken";
-import RequestWithUser from "../interfaces/requestWithUser";
-import TokenPayloadDTO from "../interfaces/tokenPayloed";
+import { NextFunction, Request, Response } from 'express';
+import jwt, { TokenExpiredError } from 'jsonwebtoken';
+import RequestWithUser from '../interfaces/requestWithUser';
+import TokenPayloadDTO from '../interfaces/tokenPayloed';
 
 // const verifyUser = async (
 //   req: RequestWithUser | Request,
 //   res: Response,
 //   next: NextFunction
 // )  => {
-  
+
 //     try {
 //       const token: string  = req.cookies.login_token;
 
@@ -46,12 +45,10 @@ import TokenPayloadDTO from "../interfaces/tokenPayloed";
 //     }
 // }
 
-
 // export default verifyUser;
 
-
 const verifyUser = async (
-  req: RequestWithUser |Request,
+  req: RequestWithUser | Request,
   res: Response,
   next: NextFunction
 ) => {
@@ -61,8 +58,8 @@ const verifyUser = async (
     if (!token) {
       return res.status(401).json({
         err: true,
-        message: "Token is missing, please log in again",
-        data: null,
+        message: 'Token is missing, please log in again',
+        data: null
       });
     }
 
@@ -78,20 +75,17 @@ const verifyUser = async (
     if (err instanceof TokenExpiredError) {
       return res.status(401).json({
         err: true,
-        message: "Token expired, please log in again",
-        data: err,
+        message: 'Token expired, please log in again',
+        data: err
       });
     }
 
     return res.status(400).json({
       err: true,
-      message: "Token is invalid or corrupted",
-      data: err,
+      message: 'Token is invalid or corrupted',
+      data: err
     });
   }
 };
 
 export default verifyUser;
-
-
-

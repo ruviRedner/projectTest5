@@ -1,4 +1,4 @@
-import { Request, Response, NextFunction } from "express";
+import { Request, Response, NextFunction } from 'express';
 export const errorHandler = (
   err: any,
   req: Request,
@@ -6,5 +6,5 @@ export const errorHandler = (
   next: NextFunction
 ) => {
   console.error(err.stack);
-  res.status(500).json({ message: "Error Eccured", error:err.message || err });
+  res.status(500).json({ message: 'Error Eccured', error: err.message || err });
 };

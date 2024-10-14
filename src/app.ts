@@ -1,12 +1,12 @@
-import express from "express";
-import dotenv from "dotenv";
-import userRouter from "./routes/userRoutes";
-import { errorHandler } from "./middleware/errorHandler";
-import connectDB from "./config/db";
-import GradsRouter from "./routes/gradsRouter";
-import authRouter from "./routes/authRouter";
-import swaggerUi,{specs} from "./config/swagger";
-import cookieParser from "cookie-parser";
+import express from 'express';
+import dotenv from 'dotenv';
+import userRouter from './routes/userRoutes';
+import { errorHandler } from './middleware/errorHandler';
+import connectDB from './config/db';
+import GradsRouter from './routes/gradsRouter';
+import authRouter from './routes/authRouter';
+import swaggerUi, { specs } from './config/swagger';
+import cookieParser from 'cookie-parser';
 
 dotenv.config();
 
@@ -21,10 +21,9 @@ app.use('/swagger', swaggerUi.serve, swaggerUi.setup(specs));
 connectDB();
 
 // Routes
-app.use("/user", userRouter);
-app.use("/grads", GradsRouter);
-app.use("/auth", authRouter);
-
+app.use('/user', userRouter);
+app.use('/grads', GradsRouter);
+app.use('/auth', authRouter);
 
 // Error handling middleware
 app.use(errorHandler);

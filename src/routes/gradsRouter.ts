@@ -1,6 +1,12 @@
-import { NextFunction, Router } from "express";
+import { NextFunction, Router } from 'express';
 
-import { addGradeToStudent,  getAva, getStudentGrade, getStudentGradeByTeacher, updateGrade } from "../controllers/gradsController";
+import {
+  addGradeToStudent,
+  getAva,
+  getStudentGrade,
+  getStudentGradeByTeacher,
+  updateGrade
+} from '../controllers/gradsController';
 
 const GradsRouter = Router();
 /**
@@ -56,7 +62,7 @@ const GradsRouter = Router();
  *       '500':
  *         description: Internal server error.
  */
-GradsRouter.post("/",addGradeToStudent );
+GradsRouter.post('/', addGradeToStudent);
 /**
  * @swagger
  * /grads:
@@ -103,12 +109,12 @@ GradsRouter.post("/",addGradeToStudent );
  *       '500':
  *         description: Internal server error.
  */
-GradsRouter.put("/", updateGrade);
+GradsRouter.put('/', updateGrade);
 /**
  * @swagger
  * /grads/student:
  *   get:
- *     summary: Get 
+ *     summary: Get
  *     description: Retrieve a single user from the system using their ID.
  *     tags:
  *       - Grads
@@ -156,12 +162,12 @@ GradsRouter.put("/", updateGrade);
  *       '500':
  *         description: Internal server error.
  */
-GradsRouter.get("/student", getStudentGrade);
+GradsRouter.get('/student', getStudentGrade as any);
 /**
  * @swagger
  * /grads/teacher:
  *   get:
- *     summary: Get 
+ *     summary: Get
  *     description: Retrieve a single user from the system using their ID.
  *     tags:
  *       - Grads
@@ -209,12 +215,12 @@ GradsRouter.get("/student", getStudentGrade);
  *       '500':
  *         description: Internal server error.
  */
-GradsRouter.get("/teacher", getStudentGradeByTeacher);
+GradsRouter.get('/teacher', getStudentGradeByTeacher as any);
 /**
  * @swagger
  * /grads/ava:
  *   get:
- *     summary: Get 
+ *     summary: Get
  *     description: Retrieve a single user from the system using their ID.
  *     tags:
  *       - Grads
@@ -262,6 +268,6 @@ GradsRouter.get("/teacher", getStudentGradeByTeacher);
  *       '500':
  *         description: Internal server error.
  */
-GradsRouter.get("/ava", getAva as unknown as NextFunction);
+GradsRouter.get('/ava', getAva as unknown as NextFunction);
 
 export default GradsRouter;

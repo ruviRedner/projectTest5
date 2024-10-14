@@ -1,7 +1,10 @@
-import { NextFunction, Router } from "express";
-import { createUser, creatNewClass, getStudent } from "../controllers/userController";
-import verifyUser from "../middleware/verifidUser";
-
+import { NextFunction, Router } from 'express';
+import {
+  createUser,
+  creatNewClass,
+  getStudent
+} from '../controllers/userController';
+import verifyUser from '../middleware/verifidUser';
 
 const userRouter = Router();
 /**
@@ -46,12 +49,12 @@ const userRouter = Router();
  *       '500':
  *         description: Internal server error.
  */
-userRouter.post("/", createUser);
+userRouter.post('/', createUser);
 /**
  * @swagger
  * /user:
  *   get:
- *     summary: Get 
+ *     summary: Get
  *     description: Retrieve a single user from the system using their ID.
  *     tags:
  *       - Users
@@ -84,8 +87,12 @@ userRouter.post("/", createUser);
  *       '500':
  *         description: Internal server error.
  */
-userRouter.get("/",verifyUser as any, getStudent as unknown as NextFunction);
+userRouter.get('/', verifyUser as any, getStudent as unknown as NextFunction);
 
-userRouter.post("/class",verifyUser as any, creatNewClass as unknown as NextFunction);
+userRouter.post(
+  '/class',
+  verifyUser as any,
+  creatNewClass as unknown as NextFunction
+);
 
 export default userRouter;
