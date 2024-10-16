@@ -15,8 +15,7 @@ const teacherOrstudentSchema: Schema<IteacherOrStudent> =
     password: {
       type: String,
       required: true,
-      minlength: 5,
-      select: false
+      minlength: 5, 
     },
     email: {
       type: String,
