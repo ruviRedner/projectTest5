@@ -1,12 +1,12 @@
 import { NextFunction, Router } from 'express';
 
-import {
-  addGradeToStudent,
-  getAva,
-  getStudentGrade,
-  getStudentGradeByTeacher,
-  updateGrade
-} from '../controllers/classController';
+// import {
+//   addGradeToStudent,
+//   getAva,
+//   getStudentGrade,
+//   getStudentGradeByTeacher,
+//   updateGrade
+// } from '../controllers/classController';
 
 const GradsRouter = Router();
 /**
@@ -62,7 +62,7 @@ const GradsRouter = Router();
  *       '500':
  *         description: Internal server error.
  */
-GradsRouter.post('/', addGradeToStudent);
+// GradsRouter.post('/', addGradeToStudent);
 /**
  * @swagger
  * /grads:
@@ -109,7 +109,7 @@ GradsRouter.post('/', addGradeToStudent);
  *       '500':
  *         description: Internal server error.
  */
-GradsRouter.put('/', updateGrade);
+// GradsRouter.put('/', updateGrade);
 /**
  * @swagger
  * /grads/student:
@@ -162,7 +162,7 @@ GradsRouter.put('/', updateGrade);
  *       '500':
  *         description: Internal server error.
  */
-GradsRouter.get('/student', getStudentGrade as any);
+// GradsRouter.get('/student', getStudentGrade as any);
 /**
  * @swagger
  * /grads/teacher:
@@ -215,7 +215,7 @@ GradsRouter.get('/student', getStudentGrade as any);
  *       '500':
  *         description: Internal server error.
  */
-GradsRouter.get('/teacher', getStudentGradeByTeacher as any);
+// GradsRouter.get('/teacher', getStudentGradeByTeacher as any);
 /**
  * @swagger
  * /grads/ava:
@@ -268,6 +268,6 @@ GradsRouter.get('/teacher', getStudentGradeByTeacher as any);
  *       '500':
  *         description: Internal server error.
  */
-GradsRouter.get('/ava', getAva as unknown as NextFunction);
+// GradsRouter.get('/ava', getAva as unknown as NextFunction);
 
 export default GradsRouter;
