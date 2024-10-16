@@ -3,7 +3,7 @@ import dotenv from 'dotenv';
 import userRouter from './routes/userRoutes';
 import { errorHandler } from './middleware/errorHandler';
 import connectDB from './config/db';
-import GradsRouter from './routes/gradsRouter';
+import classRouter from "../src/routes/classRouter"
 import authRouter from './routes/authRouter';
 import swaggerUi, { specs } from './config/swagger';
 import cookieParser from 'cookie-parser';
@@ -22,7 +22,7 @@ connectDB();
 
 // Routes
 app.use('/user', userRouter);
-app.use('/grads', GradsRouter);
+app.use('/class', classRouter);
 app.use('/auth', authRouter);
 
 // Error handling middleware
