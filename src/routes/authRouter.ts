@@ -36,7 +36,8 @@ const authRouter = Router();
  *       '500':
  *         description: Internal server error
  */
-authRouter.post("/login",login)
+authRouter.post("/login",
+    login)
 /**
  * @swagger
  * /auth/logout:
