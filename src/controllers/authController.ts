@@ -7,6 +7,8 @@ export const login = async (
   res: Response
 ): Promise<void> => {
   try {
+    
+    
     const token = await loginToSystem(req.body);
     res.cookie('login_token', token);
     res.status(200).json({ token: token.toString() });

@@ -9,8 +9,12 @@ export const loginToSystem = async (
   userData: loginDTO
 ): Promise<Error | string> => {
   const { username, password } = userData;
+  
+  
 
   const user = await userModel.findOne({ username });
+  console.log(user);
+  
   if (!username || !password) {
     return new Error('Username and password is required');
   }
@@ -18,11 +22,17 @@ export const loginToSystem = async (
   if (!user) {
     return new Error('User not found');
   }
-  // const isMatch = await bcrypt.compare(password, user.password);
+  
+  
+  const isMatch = await bcrypt.compare(password, user.password);
+  
+  
+  
+  
 
-  // if (!isMatch) {
-  //   return new Error("Incorrect password");
-  // }
+  if (!isMatch) {
+    return new Error("Incorrect password");
+  }
 
   const payload: payloedDTO = {
     id: user._id,
