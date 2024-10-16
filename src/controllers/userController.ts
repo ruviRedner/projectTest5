@@ -11,7 +11,7 @@ export const createUser = async (req: Request, res: Response) => {
     const newUser = await CreateNewUser(req.body);
     res.status(201).json({ newUser });
   } catch (err) {
-    res.status(500).json({ err: err });
+    res.status(500).json({ err: "gui" });
   }
 };
 
