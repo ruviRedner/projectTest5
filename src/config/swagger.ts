@@ -11,7 +11,7 @@ const options: swaggerJsdoc.Options = {
     }
   },
 
-  apis: ['C:/Users/רובי/Desktop/projectTest5/dist/routes/*.js'] // Path to your API routes
+  apis: ['C:/Users/רובי/Desktop/קודקוד/fullStack/tests/projectTest5/dist/routes/*.js'] // Path to your API routes
 };
 
 export const specs = swaggerJsdoc(options);
