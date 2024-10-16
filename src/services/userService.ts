@@ -2,7 +2,7 @@ import bcrypt from 'bcrypt';
 import userModel from '../models/teacherOrStudentModel';
 import { IteacherOrStudent } from '../interfaces/IteacherOrStudent';
 import classModel from '../models/ClassModel';
-import gradsModel from '../models/gradsModel';
+
 
 export const CreateNewUser = async (newUser: IteacherOrStudent) => {
   try {
@@ -12,16 +12,21 @@ export const CreateNewUser = async (newUser: IteacherOrStudent) => {
     if (!username || !email || !password) {
       throw new Error('Missing required fields: username, email, or password.');
     }
-
-    // const hashedPassword = await bcrypt.hash(password, 10);
+    console.log(password);
+    
+    const hashedPassword = await bcrypt.hash(password, 10);
+    console.log(hashedPassword);
+    console.log("gygy");
+    
+    
 
     const dbUser = new userModel({
       username,
-      password,
+      password:hashedPassword,
       email,
       roll
     });
-
+    console.log(dbUser);
     await dbUser.save();
     return dbUser;
   } catch (err) {
