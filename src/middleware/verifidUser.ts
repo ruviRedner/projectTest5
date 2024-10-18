@@ -11,7 +11,7 @@ const verifyUser = async (
   next: NextFunction
 ) => {
   try {
-    const token = req.cookies?.login_token;
+    const token = req.cookies.login_token;
 
     if (!token) {
       return res.status(401).json({
