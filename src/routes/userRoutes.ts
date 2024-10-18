@@ -1,8 +1,8 @@
 import { NextFunction, Router } from 'express';
 import {
   createUser,
-  creatNewClass,
-  getStudent
+  getStudentOne,
+  getStudents
 } from '../controllers/userController';
 import verifyUser from '../middleware/verifidUser';
 
@@ -58,6 +58,38 @@ userRouter.post('/', createUser);
  *     description: Retrieve a single user from the system using their ID.
  *     tags:
  *       - Users
+ *     responses:
+ *       '200':
+ *         description: A single student object.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 id:
+ *                   type: string
+ *                   description: The user ID.
+ *                 username:
+ *                   type: string
+ *                   description: The user's username.
+ *                 email:
+ *                   type: string
+ *                   description: The user's email address.
+ *       '404':
+ *         description: User not found.
+ *       '500':
+ *         description: Internal server error.
+ */
+userRouter.get('/', verifyUser as any, getStudents as unknown as NextFunction);
+
+/**
+ * @swagger
+ * /user:
+ *   get:
+ *     summary: Get
+ *     description: Retrieve a single user from the system using their ID.
+ *     tags:
+ *       - Users
  *     parameters:
  *       - name: id
  *         in: path
@@ -87,12 +119,6 @@ userRouter.post('/', createUser);
  *       '500':
  *         description: Internal server error.
  */
-userRouter.get('/', verifyUser as any, getStudent as unknown as NextFunction);
-
-userRouter.post(
-  '/class',
-  verifyUser as any,
-  creatNewClass as unknown as NextFunction
-);
+userRouter.get("/:id",verifyUser as any,getStudentOne as unknown as NextFunction)
 
 export default userRouter;
