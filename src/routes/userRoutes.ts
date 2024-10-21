@@ -1,6 +1,7 @@
 import { NextFunction, Router } from 'express';
 import {
   createUser,
+  getAllClases,
   getStudentOne,
   getStudents
 } from '../controllers/userController';
@@ -81,10 +82,45 @@ userRouter.post('/', createUser);
  *         description: Internal server error.
  */
 userRouter.get('/', verifyUser as any, getStudents as unknown as NextFunction);
-
 /**
  * @swagger
- * /user:
+ * /user/clases:
+ *   get:
+ *     summary: Get all available classes
+ *     description: Retrieve a list of all classes.
+ *     tags:
+ *       - Classes
+ *     responses:
+ *       '200':
+ *         description: A list of available classes.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: object
+ *                 properties:
+ *                   _id:
+ *                     type: string
+ *                     description: The ID of the class.
+ *                   name:
+ *                     type: string
+ *                     description: The name of the class.
+ *       '500':
+ *         description: Internal server error.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: Internal server error
+ */
+userRouter.get("/clases",getAllClases)
+/**
+ * @swagger
+ * /user/{id}:
  *   get:
  *     summary: Get
  *     description: Retrieve a single user from the system using their ID.
@@ -120,5 +156,6 @@ userRouter.get('/', verifyUser as any, getStudents as unknown as NextFunction);
  *         description: Internal server error.
  */
 userRouter.get("/:id",verifyUser as any,getStudentOne as unknown as NextFunction)
+
 
 export default userRouter;
