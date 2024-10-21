@@ -41,7 +41,7 @@ export const loginToSystem = async (
     payload,
     process.env.TOKEN_SECRET as string,
     {
-      expiresIn: '1h'
+      expiresIn: '40h'
     }
   );
 
