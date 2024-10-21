@@ -8,27 +8,39 @@ import { studentsDto } from '../interfaces/studentsDto';
 
 export const createNewUser = async (
   newUser: IteacherOrStudent
-): Promise<void> => {
+): Promise<IteacherOrStudent> => {
   try {
-    const { username, password, roll, email, classId } =
-      newUser;
+    const {
+      username,
+      password,
+      roll,
+      email,
+      classId,
+      className
+    } = newUser;
     if (!username || !password || !roll || !email) {
       throw new Error('fileds are required');
     }
     const hashPassword = await bcrypt.hash(password, 10);
 
-    const newuser = await new userModel({
+    const newuserT = new userModel({
       username,
       password: hashPassword,
       roll,
-      email
+      email,
+      classId,
+      className
     });
+
     if (newUser.roll === 'teacher') {
       const newClass = new classModel({
-        name: 'english'
+        name: newUser.className,
+        teacherId: newuserT._id
       });
+
       await newClass.save();
-      newuser.classId = newClass._id;
+
+      newuserT.classId = newClass._id;
     }
     if (newUser.roll === 'student') {
       const clases = await getClasses();
@@ -44,13 +56,16 @@ export const createNewUser = async (
       }
       newUser.classId = classId;
     }
-    await newuser.save();
-  } catch (error) {
-    throw new Error('bad request');
+   const u = await newuserT.save();
+   return u
+  } catch (error: any) {
+    throw new Error(`bad request: ${error.message}`);
   }
 };
-const getClasses = async (): Promise<Iclass[]> => {
+
+export const getClasses = async (): Promise<Iclass[]> => {
   const clases: Iclass[] = await classModel.find({});
+
   return clases;
 };
 
@@ -63,17 +78,18 @@ export const GetstudentDetailsOfAllStudents = async (
     if (!findTeacher || findTeacher.roll !== 'teacher') {
       throw new Error('you are not a teacher');
     }
+
     //make array of students id
     const findStudents = await classModel.aggregate([
       //only the class with this teacher
       {
         $match: {
-          teacherId: new mongoose.Types.ObjectId(Tid)
+          teacherId: new mongoose.Types.ObjectId(findTeacher._id) // השתמש במזהה של המורה
         }
       },
-      //unpaka tests
+      //unwind tests
       { $unwind: '$tests' },
-      //make a group of all students ids
+      //group all students ids
       {
         $group: {
           _id: null,
@@ -81,28 +97,32 @@ export const GetstudentDetailsOfAllStudents = async (
         }
       }
     ]);
+
     if (!findStudents.length) {
-      throw new Error(
-        'No class found for this teacher or no tests available.'
-      );
+      throw new Error('No class found for this teacher or no tests available.');
     }
+
     //pulling out the students ids
-    const studentIds = findStudents[0].studentIds;
+    const studentIds = findStudents[0].studentsIds; // עדכון כאן
+
     //finding them in users
     const students = await userModel.find({
       _id: { $in: studentIds }
     });
+
     //return details
     const studentDetails = students.map((student) => ({
       username: student.username,
       email: student.email,
       classId: student.classId
     }));
+
     return studentDetails;
   } catch (error) {
     throw new Error('no can do');
   }
 };
+
 
 export const getOneStudent = async (
   Tid: mongoose.Types.ObjectId,
