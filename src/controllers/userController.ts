@@ -1,12 +1,20 @@
 import { Request, Response } from 'express';
 
 import RequestWithUser from '../interfaces/requestWithUser';
-import { createNewUser, getOneStudent, GetstudentDetailsOfAllStudents } from '../services/userService';
+import { createNewUser, getClasses, getOneStudent, GetstudentDetailsOfAllStudents } from '../services/userService';
 
 export const createUser = async (req: Request, res: Response) => {
   try {
     const newUser = await createNewUser(req.body);
-    res.status(201).json({ newUser });
+    res.status(201).json({ msg:newUser });
+  } catch (err:any) {
+    res.status(500).json({ err:err.message });
+  }
+};
+export const getAllClases = async (req: Request, res: Response) => {
+  try {
+    const result = await getClasses();
+    res.status(200).json({ msg:result });
   } catch (err) {
     res.status(500).json({ err });
   }
