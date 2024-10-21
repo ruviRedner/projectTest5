@@ -8,7 +8,7 @@ const classSchema: Schema<Iclass> = new Schema<Iclass>({
     type: String,
     required: true,
     unique: true,
-    minlength: 5,
+    minlength: 4,
     maxlength: 10
   },
   teacherId: { type: Schema.Types.ObjectId, ref: 'users' },
