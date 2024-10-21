@@ -3,7 +3,7 @@ import dotenv from 'dotenv';
 import userRouter from './routes/userRoutes';
 import { errorHandler } from './middleware/errorHandler';
 import connectDB from './config/db';
-import classRouter from "../src/routes/classRouter"
+import classRouter from "./routes/classRouter"
 import authRouter from './routes/authRouter';
 import swaggerUi, { specs } from './config/swagger';
 import cookieParser from 'cookie-parser';
