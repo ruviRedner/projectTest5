@@ -32,19 +32,15 @@ export const addScoreToStudent = async (
     throw new Error('No student found in this class');
   }
 
-  await classModel.findByIdAndUpdate(
-    findClass._id, // מזהה את הכיתה
-    {
-      $push: {
-        tests: {
-          // מוסיף מבחן חדש למערך המבחנים
-          subject: subject, // הנושא של המבחן
-          studentId: findStudent._id, // מזהה את התלמיד
-          score: newScore // כאן נוסף הציון עצמו
-        }
+  await classModel.findByIdAndUpdate(findClass._id, {
+    $push: {
+      tests: {
+        subject: subject,
+        studentId: findStudent._id,
+        score: newScore
       }
     }
-  );
+  });
 };
 
 export const updateScore = async (
@@ -101,7 +97,7 @@ export const getAvarage = async (
     throw new Error('no class found');
   }
   const ave = await classModel.aggregate([
-    { $match:{ _id:findClass._id}  },
+    { $match: { _id: findClass._id } },
     { $unwind: '$tests' },
     {
       $group: {
@@ -119,7 +115,7 @@ export const getStudentGradeByStudent = async (
   if (!findStudent || findStudent.roll !== 'student') {
     throw new Error('you are not a student');
   }
-  const stuid = new mongoose.Types.ObjectId(Sid)
+  const stuid = new mongoose.Types.ObjectId(Sid);
   const scores = await classModel.aggregate([
     { $unwind: '$tests' },
 
@@ -131,7 +127,7 @@ export const getStudentGradeByStudent = async (
           subject: '$tests.subject',
           testId: '$tests._id'
         },
-        score: { $first: '$tests.score' } // קח את הציון של המבחן
+        score: { $first: '$tests.score' }
       }
     }
   ]);
@@ -139,7 +135,7 @@ export const getStudentGradeByStudent = async (
   if (!scores.length) {
     throw new Error('No scores found for this student.');
   }
-  return scores
+  return scores;
 };
 
 export const getStudentGradeByTeacher = async (
@@ -158,28 +154,23 @@ export const getStudentGradeByTeacher = async (
     throw new Error('no class found');
   }
   console.log(findClass);
-  
-  const stuId = new mongoose.Types.ObjectId(Sid)
+
+  const stuId = new mongoose.Types.ObjectId(Sid);
   const scores = await classModel.aggregate([
-    { $match: { _id: findClass._id } }, // מצא את הכיתה
-    { $unwind: '$tests' }, // פותח את המערך של המבחנים
-    { $match: { 'tests.studentId': stuId } }, // סנן את המבחנים כדי לקבל רק של התלמיד הספציפי
+    { $match: { _id: findClass._id } },
+    { $unwind: '$tests' },
+    { $match: { 'tests.studentId': stuId } },
     {
       $group: {
-        _id: '$tests.subject', // קבץ לפי נושא
-        scores: { $push: '$tests.score' } // שומר את כל הציונים לנושא
+        _id: '$tests.subject',
+        scores: { $push: '$tests.score' }
       }
     }
   ]);
   console.log(scores);
-  
-
-
-   // מחזיר את התוצאות
-
 
   if (!scores.length) {
     throw new Error('No scores found for this student.');
   }
   return scores;
-   }
+};

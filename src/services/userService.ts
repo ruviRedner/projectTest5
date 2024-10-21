@@ -103,7 +103,7 @@ export const GetstudentDetailsOfAllStudents = async (
     }
 
     //pulling out the students ids
-    const studentIds = findStudents[0].studentsIds; // עדכון כאן
+    const studentIds = findStudents[0].studentsIds; 
 
     //finding them in users
     const students = await userModel.find({
